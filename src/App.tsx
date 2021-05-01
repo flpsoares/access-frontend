@@ -1,7 +1,14 @@
+import Header from './components/Header'
+import Link from './components/Link';
+import { ModalCreatePostProvider } from './contexts/ModalCreatePostContext';
+
 function App() {
   return (
     <div>
-      <h1>Hello World</h1>
+      <ModalCreatePostProvider>
+        <Header />
+        <Link />
+      </ModalCreatePostProvider>
     </div>
   );
 }
