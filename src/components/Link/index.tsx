@@ -14,8 +14,24 @@ const Link: React.FC = () => {
         <AddLinkButton onClick={openModal}>
           Adicionar novo link
         </AddLinkButton>
-        <Post />
-        <Post />
+        <Post 
+          title='Meu facebook'
+          icon='facebook'
+          url='https://www.facebook.com/filipe.soares.7121/'
+          views='7'
+        />
+        <Post
+          title='Meu instagram'
+          icon='instagram'
+          url='https://www.instagram.com/filipeseventeen/'
+          views='900'
+        />
+        <Post
+          title='Meu twitter'
+          icon='twitter'
+          url='https://twitter.com/meykfeel'
+          views='27'
+        />
       </Content>
       <Cellphone>
         <ModalCell></ModalCell>

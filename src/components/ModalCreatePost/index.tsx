@@ -13,21 +13,21 @@ const ModalCreatePost: React.FC = () => {
         <input placeholder="title" type="text"/>
         <input placeholder="url" type="text"/>
         <div>
-          <select name="" id="">
-            <option value="">None</option>
-            <option value="">Facebook</option>
-            <option value="">Instagram</option>
-            <option value="">Google</option>
-            <option value="">Twitter</option>
-            <option value="">Pinterest</option>
-            <option value="">Bitcoin</option>
-            <option value="">Tik tok</option>
-            <option value="">Youtube</option>
+          <select>
+            <option value="none">None</option>
+            <option value="facebook">Facebook</option>
+            <option value="instagram">Instagram</option>
+            <option value="google">Google</option>
+            <option value="twitter">Twitter</option>
+            <option value="pinterest">Pinterest</option>
+            <option value="bitcoin">Bitcoin</option>
+            <option value="tiktok">Tik tok</option>
+            <option value="youtube">Youtube</option>
           </select>
           <button type="button">Criar</button>
         </div>
         <CloseButton type="button" onClick={closeModal}>
-          <MdClose />
+          <MdClose color="#c9d1d9" />
         </CloseButton>
       </Box>
     </Container>

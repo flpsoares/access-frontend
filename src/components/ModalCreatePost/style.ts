@@ -56,6 +56,8 @@ export const Box = styled.div`
       border-radius: 15px;
       width: 100px;
 
+      color: var(--text-primary);
+
       font-weight: 600;
 
       transition: border-radius .3s;
@@ -69,6 +71,8 @@ export const Box = styled.div`
   select {
     width: 110px;
 
+    color: var(--text-primary);
+
     font-weight: 500;
 
     border: 1px solid var(--primary);
@@ -78,6 +82,12 @@ export const Box = styled.div`
 
     background: 0;
     border-radius: 3px;
+
+    transition: all .2s;
+
+    option {
+      background: rgba(0, 0, 0, 0.7);
+    }
   }
 `
 
