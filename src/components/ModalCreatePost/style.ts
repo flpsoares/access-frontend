@@ -39,6 +39,8 @@ export const Box = styled.div`
     margin-bottom: 20px;
     color: white;
 
+    width: 100%;
+
     &::placeholder {
       color: var(--text-primary);
     }

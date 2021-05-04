@@ -49,13 +49,13 @@ const Post: React.FC<PostProps> = ({ title, url, icon, views }) => {
         setCurrentIcon(<FaPinterestP />)
       break;
       case 'bitcoin': 
-      setCurrentIcon(<FaBitcoin />)
+        setCurrentIcon(<FaBitcoin />)
       break;
       case 'tiktok':
         setCurrentIcon(<SiTiktok />)
       break;
       case 'youtube': 
-      setCurrentIcon(<FaYoutube />)
+        setCurrentIcon(<FaYoutube />)
       break;
     }
   }, [icon])
@@ -63,9 +63,11 @@ const Post: React.FC<PostProps> = ({ title, url, icon, views }) => {
   return (
     <Container>
       <div>
-        {
-          currentIcon
-        }
+        <button type="button">
+          {
+            currentIcon
+          }
+        </button>
       </div>
       <div>
         <span>{title}</span>

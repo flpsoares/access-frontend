@@ -25,7 +25,9 @@ export const Container = styled.div`
   div:nth-child(1) {
     grid-area: icon;
 
-    font-size: 20px;
+    button {
+      font-size: 20px;
+    }
   }
 
   div:nth-child(2) {

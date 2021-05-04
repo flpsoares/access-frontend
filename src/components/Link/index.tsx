@@ -1,11 +1,33 @@
 import { Container, Content, Cellphone, AddLinkButton, ModalCell } from './style'
 import Post from '../Post'
 import ModalCreatePost from '../ModalCreatePost'
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { ModalCreatePostContext } from '../../contexts/ModalCreatePostContext'
+import api from '../../services/api'
+
+interface LinkProps {
+  id: number,
+  title: string,
+  url: string,
+  icon: string,
+  views: string,
+}
+
+// interface LinkProps {
+//   posts: PostProps[]
+// }
 
 const Link: React.FC = () => {
   const { isOpen, openModal } = useContext(ModalCreatePostContext)
+
+  const [posts, setPosts] = useState<LinkProps[]>()
+
+  useEffect(() => {
+    api.get('links').then(res => {
+      setPosts(res.data)
+    })
+  }, [posts])
+
 
   return(
     <Container>
@@ -14,24 +36,19 @@ const Link: React.FC = () => {
         <AddLinkButton onClick={openModal}>
           Adicionar novo link
         </AddLinkButton>
-        <Post 
-          title='Meu facebook'
-          icon='facebook'
-          url='https://www.facebook.com/filipe.soares.7121/'
-          views='7'
-        />
-        <Post
-          title='Meu instagram'
-          icon='instagram'
-          url='https://www.instagram.com/filipeseventeen/'
-          views='900'
-        />
-        <Post
-          title='Meu twitter'
-          icon='twitter'
-          url='https://twitter.com/meykfeel'
-          views='27'
-        />
+        {
+          posts?.map((post: LinkProps) => {
+            return (
+              <Post
+                key={post.id}
+                title={post.title}
+                url={post.url}
+                icon={post.icon}
+                views={post.views}
+              />
+            )
+          })
+        }
       </Content>
       <Cellphone>
         <ModalCell></ModalCell>
