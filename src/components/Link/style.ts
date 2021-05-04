@@ -1,54 +1,86 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  width: 100%;
-  height: calc(100vh - 60px);
-
-  background: #ecf1f8;
-
-  display: flex;
-
-`
-
-export const Content = styled.div`
   width: 70%;
+  height: 180px;
 
-  display: flex;
-  align-items: center;
-  flex-direction: column;
+  color: black !important ;
 
-  overflow-x: hidden;
-`
+  border-radius: 12px;
 
-export const AddLinkButton = styled.button`
-  padding: 10px;
-  background: var(--primary);
-  border-radius: 10px;
   margin-top: 20px;
+  padding: 25px;
 
-  font-size: 16px;
-  font-weight: 500;
+  background: #FFF;
+  box-shadow: 0 0 10px gray;
 
-  color: white;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas: 
+  'icon title buttons'
+  'url url views'
+  ;
 
-  transition: filter .2s;
+  div:nth-child(1) {
+    grid-area: icon;
 
-  &:hover {
-    filter: brightness(0.8);
+    button {
+      font-size: 20px;
+    }
   }
-`
 
-export const Cellphone = styled.div`
-  width: 30%;
-  display:flex;
-  align-items: center;
-  justify-content:center;
-  flex-direction: column;
-`
+  div:nth-child(2) {
+    grid-area: title;
+    text-align: center;
+  }
 
-export const ModalCell = styled.div`
-  width: 75%;
-  height: 90%;
-  border-radius: 55px;
-  border: 10px solid black;
+  div:nth-child(3) {
+    grid-area: buttons;
+    display: flex;
+    justify-content: flex-end;
+
+    button {
+      height: 20px;
+      font-size: 20px;
+
+      transition: filter .2s;
+    }
+
+    button:nth-child(1) {
+      margin-right: 20px;
+    }
+
+    button:nth-child(2) {
+      &:hover {
+        filter: brightness(0.6);
+      }
+    }
+  }
+
+  div:nth-child(4) {
+    grid-area: url;
+
+    display: flex;
+    align-items: center;
+  }
+
+  div:nth-child(5) {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    button {
+      font-size: 20px;
+
+      display: flex;
+      align-items: center;
+      margin-right: 5px;
+    }
+
+    span {
+      font-size: 18px;
+      margin-left: 3px;
+    }
+  }
 `

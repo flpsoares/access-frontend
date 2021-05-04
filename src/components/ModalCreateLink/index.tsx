@@ -2,11 +2,11 @@ import { useContext, useRef } from 'react'
 import { Box, Container, CloseButton } from './style'
 import { MdClose } from 'react-icons/md'
 
-import { ModalCreatePostContext } from '../../contexts/ModalCreatePostContext'
+import { ModalCreateLinkContext } from '../../contexts/ModalCreateLinkContext'
 import api from '../../services/api'
 
-const ModalCreatePost: React.FC = () => {
-  const { closeModal } = useContext(ModalCreatePostContext)
+const ModalCreateLink: React.FC = () => {
+  const { closeModal } = useContext(ModalCreateLinkContext)
 
   const titleRef = useRef() as React.MutableRefObject<HTMLInputElement>;
   const urlRef = useRef() as React.MutableRefObject<HTMLInputElement>;
@@ -53,4 +53,4 @@ const ModalCreatePost: React.FC = () => {
   )
 }
 
-export default ModalCreatePost
+export default ModalCreateLink

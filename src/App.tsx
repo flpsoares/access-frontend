@@ -1,14 +1,14 @@
 import Header from './components/Header'
-import Link from './components/Link';
-import { ModalCreatePostProvider } from './contexts/ModalCreatePostContext';
+import Home from './components/Home';
+import { ModalCreateLinkProvider } from './contexts/ModalCreateLinkContext';
 
 function App() {
   return (
     <div>
-      <ModalCreatePostProvider>
+      <ModalCreateLinkProvider>
         <Header />
-        <Link />
-      </ModalCreatePostProvider>
+        <Home />
+      </ModalCreateLinkProvider>
     </div>
   );
 }

@@ -1,58 +1,94 @@
-import { Container, Content, Cellphone, AddLinkButton, ModalCell } from './style'
-import Post from '../Post'
-import ModalCreatePost from '../ModalCreatePost'
-import { useContext, useEffect, useState } from 'react'
-import { ModalCreatePostContext } from '../../contexts/ModalCreatePostContext'
-import api from '../../services/api'
+import { Container } from './style'
+
+import { BiEditAlt } from 'react-icons/bi'
+import { MdDelete } from 'react-icons/md'
+import { IoIosEye } from 'react-icons/io'
+
+import { 
+  FaFacebookF,
+  FaInstagram,
+  FaGoogle,
+  FaTwitter,
+  FaPinterestP,
+  FaBitcoin,
+  FaYoutube
+} from 'react-icons/fa'
+
+import { SiTiktok } from 'react-icons/si'
+import { useState, useEffect } from 'react'
+import { IconBaseProps } from 'react-icons'
 
 interface LinkProps {
-  id: number,
   title: string,
   url: string,
   icon: string,
-  views: string,
+  views: string
 }
 
-// interface LinkProps {
-//   posts: PostProps[]
-// }
-
-const Link: React.FC = () => {
-  const { isOpen, openModal } = useContext(ModalCreatePostContext)
-
-  const [posts, setPosts] = useState<LinkProps[]>()
+const Link: React.FC<LinkProps> = ({ title, url, icon, views }) => {
+  const [currentIcon, setCurrentIcon] = useState<IconBaseProps>()
 
   useEffect(() => {
-    api.get('links').then(res => {
-      setPosts(res.data)
-    })
-  }, [posts])
+    switch(icon) {
+      case 'none':
 
+      break;
+      case 'facebook':
+        setCurrentIcon(<FaFacebookF />)
+      break;
+      case 'instagram':
+        setCurrentIcon(<FaInstagram />)
+      break;
+      case 'google':
+        setCurrentIcon(<FaGoogle />)
+      break;
+      case 'twitter':
+        setCurrentIcon(<FaTwitter />)
+      break;
+      case 'pinterest':
+        setCurrentIcon(<FaPinterestP />)
+      break;
+      case 'bitcoin': 
+        setCurrentIcon(<FaBitcoin />)
+      break;
+      case 'tiktok':
+        setCurrentIcon(<SiTiktok />)
+      break;
+      case 'youtube': 
+        setCurrentIcon(<FaYoutube />)
+      break;
+    }
+  }, [icon])
 
-  return(
+  return (
     <Container>
-      { isOpen && <ModalCreatePost /> }
-      <Content>
-        <AddLinkButton onClick={openModal}>
-          Adicionar novo link
-        </AddLinkButton>
-        {
-          posts?.map((post: LinkProps) => {
-            return (
-              <Post
-                key={post.id}
-                title={post.title}
-                url={post.url}
-                icon={post.icon}
-                views={post.views}
-              />
-            )
-          })
-        }
-      </Content>
-      <Cellphone>
-        <ModalCell></ModalCell>
-      </Cellphone>
+      <div>
+        <button type="button">
+          {
+            currentIcon
+          }
+        </button>
+      </div>
+      <div>
+        <span>{title}</span>
+      </div>
+      <div>
+        <button>
+          <BiEditAlt />
+        </button>
+        <button>
+          <MdDelete color="red" />
+        </button>
+      </div>
+      <div>
+        <span>{url}</span>
+      </div>
+      <div>
+        <button>
+          <IoIosEye />
+          <span>{views}</span>
+        </button>
+      </div>
     </Container>
   )
 }
