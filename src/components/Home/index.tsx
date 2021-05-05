@@ -4,6 +4,8 @@ import ModalCreateLink from '../ModalCreateLink'
 import { useContext, useEffect, useState } from 'react'
 import { ModalCreateLinkContext } from '../../contexts/ModalCreateLinkContext'
 import api from '../../services/api'
+import ModalDeleteLink from '../ModalDeleteLink'
+import { ModalDeleteLinkContext } from '../../contexts/ModalDeleteLinkContext'
 
 interface LinkProps {
   id: number,
@@ -14,7 +16,8 @@ interface LinkProps {
 }
 
 const Home: React.FC = () => {
-  const { isOpen, openModal } = useContext(ModalCreateLinkContext)
+  const { modalCreateLinkIsOpen, openModalCreateLink } = useContext(ModalCreateLinkContext)
+  const { modalDeleteLinkIsOpen } = useContext(ModalDeleteLinkContext)
 
   const [links, setLinks] = useState<LinkProps[]>()
 
@@ -24,12 +27,12 @@ const Home: React.FC = () => {
     })
   }, [links])
 
-
   return(
     <Container>
-      { isOpen && <ModalCreateLink /> }
+      { modalCreateLinkIsOpen && <ModalCreateLink /> }
+      { modalDeleteLinkIsOpen && <ModalDeleteLink id="8" /> }
       <Content>
-        <AddLinkButton onClick={openModal}>
+        <AddLinkButton onClick={openModalCreateLink}>
           Adicionar novo link
         </AddLinkButton>
         {

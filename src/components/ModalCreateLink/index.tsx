@@ -6,7 +6,7 @@ import { ModalCreateLinkContext } from '../../contexts/ModalCreateLinkContext'
 import api from '../../services/api'
 
 const ModalCreateLink: React.FC = () => {
-  const { closeModal } = useContext(ModalCreateLinkContext)
+  const { closeModalCreateLink } = useContext(ModalCreateLinkContext)
 
   const titleRef = useRef() as React.MutableRefObject<HTMLInputElement>;
   const urlRef = useRef() as React.MutableRefObject<HTMLInputElement>;
@@ -15,7 +15,7 @@ const ModalCreateLink: React.FC = () => {
   const handleSubmit = async (e: any) => {
     e.preventDefault()
 
-    closeModal()
+    closeModalCreateLink()
 
     await api.post('link', {
       title: titleRef.current.value,
@@ -45,7 +45,7 @@ const ModalCreateLink: React.FC = () => {
             <button onClick={handleSubmit}>Criar</button>
           </div>
         </form>
-        <CloseButton type="button" onClick={closeModal}>
+        <CloseButton type="button" onClick={closeModalCreateLink}>
           <MdClose color="#c9d1d9" />
         </CloseButton>
       </Box>

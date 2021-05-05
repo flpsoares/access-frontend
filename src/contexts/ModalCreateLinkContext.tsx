@@ -1,9 +1,9 @@
 import { useState, createContext, ReactNode } from 'react'
 
 interface ModalCreateLinkContextData {
-  isOpen: boolean
-  openModal: () => void
-  closeModal: () => void
+  modalCreateLinkIsOpen: boolean
+  openModalCreateLink: () => void
+  closeModalCreateLink: () => void
 }
 
 interface ModalCreateLinkProviderProps {
@@ -13,18 +13,18 @@ interface ModalCreateLinkProviderProps {
 export const ModalCreateLinkContext = createContext({} as ModalCreateLinkContextData)
 
 export function ModalCreateLinkProvider({children}: ModalCreateLinkProviderProps) {
-  const [isOpen, setIsOpen] = useState(false)
+  const [modalCreateLinkIsOpen, setModalCreateLinkIsOpen] = useState(false)
 
-  function openModal() {
-    setIsOpen(true)
+  function openModalCreateLink() {
+    setModalCreateLinkIsOpen(true)
   }
 
-  function closeModal() {
-    setIsOpen(false)
+  function closeModalCreateLink() {
+    setModalCreateLinkIsOpen(false)
   }
 
   return (
-    <ModalCreateLinkContext.Provider value={{isOpen, openModal, closeModal}}>
+    <ModalCreateLinkContext.Provider value={{modalCreateLinkIsOpen, openModalCreateLink, closeModalCreateLink}}>
       {children}
     </ModalCreateLinkContext.Provider>
   )

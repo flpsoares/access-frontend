@@ -15,8 +15,9 @@ import {
 } from 'react-icons/fa'
 
 import { SiTiktok } from 'react-icons/si'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { IconBaseProps } from 'react-icons'
+import { ModalDeleteLinkContext } from '../../contexts/ModalDeleteLinkContext'
 
 interface LinkProps {
   title: string,
@@ -27,6 +28,7 @@ interface LinkProps {
 
 const Link: React.FC<LinkProps> = ({ title, url, icon, views }) => {
   const [currentIcon, setCurrentIcon] = useState<IconBaseProps>()
+  const { openModalDeleteLink } = useContext(ModalDeleteLinkContext)
 
   useEffect(() => {
     switch(icon) {
@@ -76,7 +78,7 @@ const Link: React.FC<LinkProps> = ({ title, url, icon, views }) => {
         <button>
           <BiEditAlt />
         </button>
-        <button>
+        <button onClick={openModalDeleteLink}>
           <MdDelete color="red" />
         </button>
       </div>
