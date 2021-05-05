@@ -4,6 +4,8 @@ import { BiEditAlt } from 'react-icons/bi'
 import { MdDelete } from 'react-icons/md'
 import { IoIosEye } from 'react-icons/io'
 
+import DeleteLink from '../../events/DeleteLinkEvents'
+
 import { 
   FaFacebookF,
   FaInstagram,
@@ -15,9 +17,9 @@ import {
 } from 'react-icons/fa'
 
 import { SiTiktok } from 'react-icons/si'
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect } from 'react'
 import { IconBaseProps } from 'react-icons'
-import { ModalDeleteLinkContext } from '../../contexts/ModalDeleteLinkContext'
+import api from '../../services/api'
 
 interface LinkProps {
   title: string,
@@ -26,9 +28,8 @@ interface LinkProps {
   views: string
 }
 
-const Link: React.FC<LinkProps> = ({ title, url, icon, views }) => {
+const Link: React.FC<LinkProps> = ({ title, url, icon, views}) => {
   const [currentIcon, setCurrentIcon] = useState<IconBaseProps>()
-  const { openModalDeleteLink } = useContext(ModalDeleteLinkContext)
 
   useEffect(() => {
     switch(icon) {
@@ -62,14 +63,17 @@ const Link: React.FC<LinkProps> = ({ title, url, icon, views }) => {
     }
   }, [icon])
 
+  const getLinkTitle = () => {
+    api.get(`link/${title}`).then(res => {
+      DeleteLink.emit('currentTitle', res.data.title)
+      console.log(res.data)
+    })
+  }
+
   return (
     <Container>
       <div>
-        <button type="button">
-          {
-            currentIcon
-          }
-        </button>
+        <button type="button">{currentIcon}</button>
       </div>
       <div>
         <span>{title}</span>
@@ -78,7 +82,7 @@ const Link: React.FC<LinkProps> = ({ title, url, icon, views }) => {
         <button>
           <BiEditAlt />
         </button>
-        <button onClick={openModalDeleteLink}>
+        <button onClick={getLinkTitle}>
           <MdDelete color="red" />
         </button>
       </div>

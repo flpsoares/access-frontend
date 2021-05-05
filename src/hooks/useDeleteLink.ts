@@ -3,14 +3,14 @@ import { useState, useEffect } from 'react'
 import DeleteLink from '../events/DeleteLinkEvents'
 
 export function useDeleteLink() {
-  const [id, setId] = useState<string>()
+  const [title, setTitle] = useState<string>()
 
   useEffect(() => {
-    DeleteLink.on('currentId', setId)
+    DeleteLink.on('currentTitle', setTitle)
     return () => {
-      DeleteLink.off('currentId', setId)
+      DeleteLink.off('currentTitle', setTitle)
     }
   }, [])
 
-  return {id}
+  return {title}
 }

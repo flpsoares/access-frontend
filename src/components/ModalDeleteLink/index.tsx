@@ -1,30 +1,32 @@
-import { useContext } from 'react'
 import { MdClose } from 'react-icons/md'
-import { ModalDeleteLinkContext } from '../../contexts/ModalDeleteLinkContext'
 import api from '../../services/api'
 import { Container, Box, CloseButton } from './style'
 
-interface LinkId {
-  id: string
+import DeleteLink from '../../events/DeleteLinkEvents'
+
+interface LinkTitle {
+  title: string
 }
 
-const ModalDeleteLink: React.FC<LinkId> = ({id}) => {
-  const { closeModalDeleteLink } = useContext(ModalDeleteLinkContext)
-
+const ModalDeleteLink: React.FC<LinkTitle> = ({title}) => {
   const deleteLink = async () => {
-    api.delete(`link/${id}`)
-    closeModalDeleteLink()
+    api.delete(`link/${title}`)
+    DeleteLink.emit('currentTitle', '')
+  }
+
+  const closeModal = () => {
+    DeleteLink.emit('currentTitle', '')
   }
   
   return (
     <Container>
       <Box>
-        <h3>Deseja mesmo excluir este link?</h3>
+        <h3>Deseja mesmo excluir o link {title}?</h3>
         <div>
           <button type="button" onClick={deleteLink}>Sim</button>
-          <button type="button" onClick={closeModalDeleteLink}>Não</button>
+          <button type="button" onClick={closeModal}>Não</button>
         </div>
-        <CloseButton type="button" onClick={closeModalDeleteLink}>
+        <CloseButton type="button" onClick={closeModal}>
           <MdClose color="#c9d1d9" />
         </CloseButton>
       </Box>
