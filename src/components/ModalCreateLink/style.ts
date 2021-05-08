@@ -85,8 +85,6 @@ export const Box = styled.div`
     background: 0;
     border-radius: 3px;
 
-    transition: all .2s;
-
     option {
       background: rgba(0, 0, 0, 0.7);
     }

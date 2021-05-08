@@ -1,11 +1,18 @@
-import { Container, Content, Cellphone, AddLinkButton, ModalCell } from './style'
-import Link from '../Link'
-import ModalCreateLink from '../ModalCreateLink'
 import { useContext, useEffect, useState } from 'react'
-import { ModalCreateLinkContext } from '../../contexts/ModalCreateLinkContext'
+import Link from '../Link'
 import api from '../../services/api'
-import ModalDeleteLink from '../ModalDeleteLink'
+
+import { Container, Content, Cellphone, AddLinkButton, ModalCell } from './style'
+import { ModalCreateLinkContext } from '../../contexts/ModalCreateLinkContext'
+
 import { useDeleteLink } from '../../hooks/useDeleteLink'
+import { useUpdateLink } from '../../hooks/useUpdateLink'
+
+import ModalCreateLink from '../ModalCreateLink'
+import ModalDeleteLink from '../ModalDeleteLink'
+import ModalUpdateLink from '../ModalUpdateLink'
+import { MoreLink } from '../../contexts/MoreLinkContext'
+// import DeleteLinkEvents from '../../events/DeleteLinkEvents'
 
 interface LinkProps {
   id: number,
@@ -17,22 +24,28 @@ interface LinkProps {
 
 const Home: React.FC = () => {
   const { modalCreateLinkIsOpen, openModalCreateLink } = useContext(ModalCreateLinkContext)
+  const {  setLinksLength, linksLength, setLinkUpdated, linkUpdated } = useContext(MoreLink)
 
-  const { title } = useDeleteLink()
+  const { deleteTitle } = useDeleteLink()
 
-  const [links, setLinks] = useState<LinkProps[]>()
+  const { updateId, updateTitle, updateUrl, updateIcon } = useUpdateLink()
+
+  const [links, setLinks] = useState<LinkProps[]>([])
+
 
   useEffect(() => {
     api.get('links').then(res => {
       setLinks(res.data)
+      setLinksLength(res.data.length)
     })
-  }, [links])
+  }, [linksLength, setLinksLength, linkUpdated, setLinkUpdated])
 
   return(
     <Container>
       { modalCreateLinkIsOpen && <ModalCreateLink /> }
-      { title && <ModalDeleteLink title={title} /> }
-      {console.log(title)}
+      { deleteTitle && <ModalDeleteLink title={deleteTitle} /> }
+      { updateTitle && <ModalUpdateLink id={updateId} title={updateTitle} url={updateUrl} icon={updateIcon} /> }
+      
       <Content>
         <AddLinkButton onClick={openModalCreateLink}>
           Adicionar novo link

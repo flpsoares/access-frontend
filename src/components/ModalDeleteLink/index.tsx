@@ -3,15 +3,22 @@ import api from '../../services/api'
 import { Container, Box, CloseButton } from './style'
 
 import DeleteLink from '../../events/DeleteLinkEvents'
+import { useContext } from 'react'
+import { MoreLink } from '../../contexts/MoreLinkContext'
 
 interface LinkTitle {
   title: string
 }
 
 const ModalDeleteLink: React.FC<LinkTitle> = ({title}) => {
+  const { removeLink } = useContext(MoreLink)
+
   const deleteLink = async () => {
     api.delete(`link/${title}`)
+    DeleteLink.emit('deletedLink', title)
     DeleteLink.emit('currentTitle', '')
+
+    removeLink()
   }
 
   const closeModal = () => {

@@ -5,6 +5,7 @@ import { MdDelete } from 'react-icons/md'
 import { IoIosEye } from 'react-icons/io'
 
 import DeleteLink from '../../events/DeleteLinkEvents'
+import UpdateLinkEvents from '../../events/UpdateLinkEvents'
 
 import { 
   FaFacebookF,
@@ -33,7 +34,7 @@ const Link: React.FC<LinkProps> = ({ title, url, icon, views}) => {
 
   useEffect(() => {
     switch(icon) {
-      case 'none':
+      case 'nenhuma':
 
       break;
       case 'facebook':
@@ -63,10 +64,18 @@ const Link: React.FC<LinkProps> = ({ title, url, icon, views}) => {
     }
   }, [icon])
 
-  const getLinkTitle = () => {
+  const getLinkTitleDelete = () => {
     api.get(`link/${title}`).then(res => {
       DeleteLink.emit('currentTitle', res.data.title)
-      console.log(res.data)
+    })
+  }
+
+  const getLinkTitleUpdate = () => {
+    api.get(`link/${title}`).then(res => {
+      UpdateLinkEvents.emit('currentId', res.data.id)
+      UpdateLinkEvents.emit('currentTitle', res.data.title)
+      UpdateLinkEvents.emit('currentUrl', res.data.url)
+      UpdateLinkEvents.emit('currentIcon', res.data.icon)
     })
   }
 
@@ -79,10 +88,10 @@ const Link: React.FC<LinkProps> = ({ title, url, icon, views}) => {
         <span>{title}</span>
       </div>
       <div>
-        <button>
+        <button onClick={getLinkTitleUpdate}>
           <BiEditAlt />
         </button>
-        <button onClick={getLinkTitle}>
+        <button onClick={getLinkTitleDelete}>
           <MdDelete color="red" />
         </button>
       </div>
